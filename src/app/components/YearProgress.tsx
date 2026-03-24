@@ -39,7 +39,7 @@ export default function YearProgress() {
   // Register service worker & listen for install prompt
   useEffect(() => {
     setNow(new Date());
-    const interval = setInterval(() => setNow(new Date()), 60_000);
+    const interval = setInterval(() => setNow(new Date()), 1_000);
 
     // Check if already installed (standalone mode)
     if (window.matchMedia("(display-mode: standalone)").matches) {
@@ -95,10 +95,13 @@ export default function YearProgress() {
     <div className="animate-fade-in flex flex-col items-center justify-center w-full min-h-screen px-4 py-10 select-none">
       {/* Header */}
       <div className="mb-8 text-center">
-        <h1 className="text-3xl sm:text-4xl font-light tracking-widest text-zinc-200 font-mono">
-          {year}
-        </h1>
-        <p className="mt-2 text-sm tracking-wider text-zinc-500 font-mono uppercase">
+        <p className="text-4xl sm:text-5xl font-extralight tracking-widest text-zinc-100 font-mono tabular-nums">
+          {now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+        </p>
+        <p className="mt-2 text-sm sm:text-base tracking-wider text-zinc-400 font-mono">
+          {now.toLocaleDateString([], { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
+        </p>
+        <p className="mt-3 text-xs tracking-widest text-zinc-600 font-mono uppercase">
           Year Progress
         </p>
       </div>
